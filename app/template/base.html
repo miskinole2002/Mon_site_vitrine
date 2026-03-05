@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>William- Developpeur Web</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #00e676;
+      --dark: #0a0a0a;
+      --dark2: #111111;
+      --dark3: #181818;
+      --white: #ffffff;
+      --gray: #aaaaaa;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--dark);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, .brand {
+      font-family: 'Syne', sans-serif;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background: var(--dark) !important;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid #1e1e1e;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--white) !important;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--green);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: #000;
+      font-size: 1rem;
+    }
+
+    .nav-link {
+      color: var(--white) !important;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0.6rem;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--green);
+      transition: width 0.3s;
+    }
+
+    .nav-link:hover { color: var(--green) !important; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ===== HERO ===== */
+    #home {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #home::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0,230,118,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: var(--gray);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-name {
+      color: var(--green);
+      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      font-weight: 800;
+      display: block;
+      line-height: 1.1;
+    }
+
+    .hero-desc {
+      color: var(--gray);
+      max-width: 480px;
+      line-height: 1.7;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .btn-green {
+      background: var(--green);
+      color: #000;
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      padding: 12px 32px;
+      border: none;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-green:hover {
+      background: #fff;
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline-green {
+      background: transparent;
+      color: var(--green);
+      border: 2px solid var(--green);
+      font-weight: 700;
+      font-family: 'Syne', sans-serif;
+      padding: 10px 30px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-outline-green:hover {
+      background: var(--green);
+      color: #000;
+    }
+
+    /* Hero image circle */
+    .hero-img-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    .hero-circle-bg {
+      width: 400px;
+      height: 400px;
+      background: var(--green);
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.9;
+    }
+
+    .hero-img-placeholder {
+      position: relative;
+      z-index: 2;
+      width: 360px;
+      height: 420px;
+      background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-img-placeholder i {
+      font-size: 8rem;
+      color: #444;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .stat-item h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--green);
+      line-height: 1;
+    }
+
+    .stat-item p {
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ===== ABOUT ===== */
+    #about {
+      padding: 100px 0;
+      background: var(--dark2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #about::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0,230,118,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .about-img-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-img-placeholder {
+      width: 300px;
+      height: 380px;
+      background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-img-placeholder i {
+      font-size: 6rem;
+      color: #444;
+    }
+
+    .about-ring {
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      height: 60px;
+      border: 3px solid var(--green);
+      border-radius: 50%;
+      z-index: 3;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .section-title span {
+      color: var(--green);
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--gray);
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .about-text {
+      color: var(--gray);
+      line-height: 1.8;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .skill-bar-wrap {
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+
+    .skill-label span:last-child { color: var(--green); }
+
+    .skill-bar {
+      height: 5px;
+      background: #222;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: var(--green);
+      border-radius: 99px;
+      transition: width 1.5s ease;
+    }
+
+    /* ===== SERVICES ===== */
+    #services {
+      padding: 100px 0;
+      background: var(--dark);
+    }
+
+    .service-card {
+      background: var(--dark3);
+      border: 1px solid #222;
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      transition: all 0.4s;
+      height: 100%;
+    }
+
+    .service-card:hover {
+      border-color: var(--green);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px rgba(0,230,118,0.1);
+    }
+
+    .service-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      font-size: 1.5rem;
+      color: #000;
+      transition: all 0.4s;
+    }
+
+    .service-card:hover .service-icon {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    .service-card h4 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .service-card p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ===== PORTFOLIO ===== */
+    #portfolio {
+      padding: 100px 0;
+      background: var(--dark2);
+    }
+
+    .portfolio-card {
+      background: var(--dark3);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #222;
+      transition: all 0.4s;
+    }
+
+    .portfolio-card:hover {
+      border-color: var(--green);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 50px rgba(0,230,118,0.08);
+    }
+
+    .portfolio-img {
+      height: 200px;
+      background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: #333;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portfolio-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.8));
+    }
+
+    .portfolio-body {
+      padding: 1.5rem;
+    }
+
+    .portfolio-tag {
+      background: rgba(0,230,118,0.15);
+      color: var(--green);
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 99px;
+      display: inline-block;
+      margin-bottom: 0.7rem;
+      font-weight: 500;
+    }
+
+    .portfolio-body h5 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-body p {
+      color: var(--gray);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    /* ===== CONTACT ===== */
+    #contact {
+      padding: 100px 0;
+      background: var(--dark);
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(0,230,118,0.1);
+      border: 1px solid rgba(0,230,118,0.3);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-info-item h6 {
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+
+    .contact-info-item p {
+      color: var(--white);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .contact-form .form-control,
+    .contact-form .form-select {
+      background: var(--dark3);
+      border: 1px solid #2a2a2a;
+      color: var(--white);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color 0.3s;
+    }
+
+    .contact-form .form-control:focus,
+    .contact-form .form-select:focus {
+      background: var(--dark3);
+      border-color: var(--green);
+      color: var(--white);
+      box-shadow: 0 0 0 3px rgba(0,230,118,0.1);
+    }
+
+    .contact-form textarea { resize: none; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark2);
+      padding: 2rem 0;
+      border-top: 1px solid #1e1e1e;
+      text-align: center;
+      color: var(--gray);
+      font-size: 0.85rem;
+    }
+
+    footer span { color: var(--green); }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      width: 42px;
+      height: 42px;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(0,230,118,0.08);
+    }
+
+    /* ===== ANIMATIONS ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
+    /* ===== CURSOR GLOW ===== */
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(0,230,118,0.04) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+      transform: translate(-50%, -50%);
+      transition: left 0.1s, top 0.1s;
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <div class="brand-icon">M</div>
+
+      M-Tech
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="fas fa-bars text-white"></i>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        
+        <h1 class="hero-title fade-in delay-1">
+          Bonjour Je suis 
+          <span class="hero-name">William Sadeu</span>
+          <span class="hero-name">developpeur web</span>
+
+        </h1>
+        <p class="hero-desc fade-in delay-2">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, repellat. Je crée des expériences digitales uniques et mémorables.
+        </p>
+        <div class="d-flex gap-3 flex-wrap fade-in delay-3">
+          <a href="#portfolio" class="btn-green">Voir mon travail</a>
+          <a href="#contact" class="btn-outline-green">Me contacter</a>
+        </div>
+        <div class="hero-stats fade-in delay-3">
+          <div class="stat-item">
+            <h3>2+</h3>
+            <p>Années d'exp.</p>
+          </div>
+          <div class="stat-item">
+            <h3>10+</h3>
+            <p>Projets</p>
+          </div>
+          
+        </div>
+      </div>
+      <div class="col-lg-6 mt-5 mt-lg-0">
+        <div class="hero-img-wrap fade-in delay-2">
+          <div class="hero-circle-bg"></div>
+          <div class="hero-img-placeholder">
+            <i class="fas fa-user"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <div class="about-img-wrap fade-in">
+          <div class="about-img-placeholder">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div class="about-ring"></div>
+        </div>
+      </div>
+      <div class="col-lg-7 fade-in delay-2">
+        <h2 class="section-title">
+          <span>Developpeur</span> Pro
+        </h2>
+        <p class="about-text">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt minus maiores laudantium officiis ad provident vero pariatur incidunt nobis voluptatem aliquid laborum dolore iusto similique, quas ipsa harum esse nisi consectetur.
+        </p>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>HTML / CSS</span><span>95%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>JavaScript</span><span>85%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>Python</span><span>90%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-label"><span>C#</span><span>80%</span></div>
+          <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+        <a href="#contact" class="btn-green mt-3">En savoir plus</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2 class="section-title">MES <span>SERVICES</span></h2>
+      <p class="section-subtitle">Lorem ipsum dolor sit amet consectetur</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4 fade-in delay-1">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+          <h4>Développement Web</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, nostrum ullam. Aperiam iusto sunt ducimus.</p>
+          <a href="#" class="btn-green" style="font-size:0.8rem; padding: 10px 20px;">En savoir plus</a>
+        </div>
+      </div>
+      <div class="col-md-4 fade-in delay-2">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-pencil-ruler"></i></div>
+          <h4>SAAS</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, nostrum ullam. Aperiam iusto sunt ducimus.</p>
+          <a href="#" class="btn-green" style="font-size:0.8rem; padding: 10px 20px;">En savoir plus</a>
+        </div>
+      </div>
+      <div class="col-md-4 fade-in delay-5">
+        <div class="service-card">
+          <div class="service-icon"><i class="fas fa-palette"></i></div>
+          <h4>Graphic Design</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, nostrum ullam. Aperiam iusto sunt ducimus.</p>
+          <a href="#" class="btn-green" style="font-size:0.8rem; padding: 10px 20px;">En savoir plus</a>
+        </div>
+      </div>
+     
+     
+      
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2 class="section-title">MON <span>PORTFOLIO</span></h2>
+      <p class="section-subtitle">Non disponible pour le moment</p>
+    </div>
+    <!-- <div class="row g-4">
+      <div class="col-md-4 fade-in delay-1">
+        <div class="portfolio-card">
+          <div class="portfolio-img"><i class="fas fa-store"></i></div>
+          <div class="portfolio-body">
+            <span class="portfolio-tag">E-Commerce</span>
+            <h5>Boutique en ligne</h5>
+            <p>Conception complète d'une boutique moderne avec UX optimisée.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 fade-in delay-2">
+        <div class="portfolio-card">
+          <div class="portfolio-img"><i class="fas fa-chart-line"></i></div>
+          <div class="portfolio-body">
+            <span class="portfolio-tag">Dashboard</span>
+            <h5>Dashboard Analytics</h5>
+            <p>Interface de visualisation de données en temps réel.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 fade-in delay-3">
+        <div class="portfolio-card">
+          <div class="portfolio-img"><i class="fas fa-mobile-alt"></i></div>
+          <div class="portfolio-body">
+            <span class="portfolio-tag">Mobile App</span>
+            <h5>Application Mobile</h5>
+            <p>Design d'une app iOS/Android avec UX intuitive.</p>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header fade-in">
+      <h2 class="section-title">ME <span>CONTACTER</span></h2>
+      <p class="section-subtitle">Discutons de votre prochain projet</p>
+    </div>
+    <div class="row g-5">
+      <div class="col-lg-5 fade-in delay-1">
+        <p class="mb-4 section-subtitle">Je suis disponible pour des projets freelance. Contactez-moi et je vous répondrai dans les plus brefs délais.</p>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <h6>Adresse</h6>
+            <p>3565 Rue Rivard , Laval , QC , H7E4P7</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <h6>Email</h6>
+            <p>sadeufotsing2002@gmail.com</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <h6>Téléphone</h6>
+            <p>+6132777092</p>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/william-junior-sadeu-fotsing-b836732a6/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/miskinole2002" class="social-link"><i class="fab fa-github"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-7 fade-in delay-2">
+        <form class="contact-form">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <input type="text" class="form-control" placeholder="Votre nom">
+            </div>
+            <div class="col-md-6">
+              <input type="email" class="form-control" placeholder="Votre email">
+            </div>
+            <div class="col-12">
+              <input type="text" class="form-control" placeholder="Sujet">
+            </div>
+            <div class="col-12">
+              <textarea class="form-control" rows="6" placeholder="Votre message..."></textarea>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn-green w-100" style="text-align:center;">
+                Envoyer le message <i class="fas fa-paper-plane ms-2"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2026 <span>William</span>. Tous droits réservés <span></span></p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Cursor glow
+  const glow = document.getElementById('cursorGlow');
+  document.addEventListener('mousemove', e => {
+    glow.style.left = e.clientX + 'px';
+    glow.style.top = e.clientY + 'px';
+  });
+
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Form submit
+  document.querySelector('.contact-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = '✓ Message envoyé!';
+    btn.style.background = '#fff';
+    setTimeout(() => {
+      btn.innerHTML = 'Envoyer le message <i class="fas fa-paper-plane ms-2"></i>';
+      btn.style.background = '';
+    }, 3000);
+  });
+</script>
+</body>
+</html>
